@@ -1,6 +1,5 @@
 import api from '../axios';
 
-
 // ─── Events ──────────────────────────────────────────────────
 export const getEvents = async () => {
     const res = await api.get('/api/organizer/events/');
@@ -31,7 +30,7 @@ export const sendBookingRequest = async (data) => {
 };
 
 export const updateEvent = async (eventId, data) => {
-    const res = await api.put(/api/organizer/events/${eventId}/, data);
+    const res = await api.put(`/api/organizer/events/${eventId}/`, data);
     return res.data;
 };
 
@@ -44,11 +43,31 @@ export const getBookingInbox = async () => {
 
 export const updateBookingStatus = async (bookingId, status) => {
     // Talent accepts or rejects — status: 'accepted' | 'rejected'
-    const res = await api.patch(/api/organizer/bookings/${bookingId}/status/, { status });
+    const res = await api.patch(`/api/organizer/bookings/${bookingId}/status/`, { status });
     return res.data;
 };
 
 export const cancelBookingRequest = async (bookingId) => {
-    const res = await api.delete(/api/organizer/bookings/${bookingId}/cancel/);
+    const res = await api.delete(`/api/organizer/bookings/${bookingId}/cancel/`);
+    return res.data;
+};
+
+export const getOrganizerProfile = async () => {
+    const res = await api.get('/api/organizer/profile/');
+    return res.data;
+};
+
+export const createOrganizerProfile = async (data) => {
+    const res = await api.post('/api/organizer/profile/', data);
+    return res.data;
+};
+
+export const updateOrganizerProfile = async (data) => {
+    const res = await api.put('/api/organizer/profile/', data);
+    return res.data;
+};
+
+export const getAllOrganizers = async () => {
+    const res = await api.get('/api/organizer/all/');
     return res.data;
 };

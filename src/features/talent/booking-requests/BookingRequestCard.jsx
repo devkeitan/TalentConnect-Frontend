@@ -30,7 +30,6 @@ export function BookingRequestCard({ booking, onAccept, onReject }) {
   }
 
   const organizerName = booking.organizer_company ?? booking.organizer?.name ?? "Organizer"
-  const organizerAvatar = booking.organizer_avatar ?? booking.organizer?.avatar ?? ""
   const eventName = booking.event_name ?? booking.event?.event_name ?? "Event"
   const eventType = booking.event_type ?? booking.event?.event_type ?? ""
   const eventDate = booking.event_date ?? booking.event?.date ?? ""
@@ -44,14 +43,9 @@ export function BookingRequestCard({ booking, onAccept, onReject }) {
     >
       <div className="flex items-start justify-between gap-4 mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-muted overflow-hidden shrink-0">
-            <img
-              src={organizerAvatar}
-              alt={organizerName}
-              className="w-full h-full object-cover"
-              onError={(e) => { e.target.style.display = "none" }}
-            />
-          </div>
+          <div className="w-10 h-10 rounded-full bg-primary/10 text-primary shrink-0 flex items-center justify-center font-semibold text-sm">
+  {organizerName.charAt(0).toUpperCase()}
+</div>
           <div>
             <div className="font-medium text-sm">{organizerName}</div>
             <div className="text-xs text-muted-foreground">{eventType}</div>
