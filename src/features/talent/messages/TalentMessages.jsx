@@ -26,13 +26,17 @@ const TalentMessages = () => {
 
       {/* Chat Area */}
       <div className="flex-1 bg-white">
-        {selectedId ? (
-          <ChatWindow conversationId={selectedId} currentUserId={currentUserId} />
-        ) : (
-          <div className="flex-1 h-full flex items-center justify-center text-gray-400">
-            Select a conversation to start chatting 💬
-          </div>
-        )}
+{selectedId && currentUserId ? (   // ← add currentUserId check
+  <ChatWindow conversationId={selectedId} currentUserId={currentUserId} />
+) : selectedId ? (
+  <div className="flex-1 h-full flex items-center justify-center text-gray-400">
+    Loading...
+  </div>
+) : (
+  <div className="flex-1 h-full flex items-center justify-center text-gray-400">
+    Select a conversation to start chatting 💬
+  </div>
+)}
       </div>
 
     </div>

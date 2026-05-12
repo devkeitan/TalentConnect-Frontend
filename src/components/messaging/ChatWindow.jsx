@@ -39,12 +39,18 @@ const ChatWindow = ({ conversationId, currentUserId }) => {
   }, [messages]);
 
   // ─── Send message ─────────────────────────────────────
-  const handleSend = () => {
-    if (!input.trim() || !socketRef.current) return;
 
-   socketRef.current.send(JSON.stringify({ content: input }));
+const handleSend = () => {
+  if (!input.trim()) return;
+  if (!currentUserId) return; // ← add this
+  if (!socketRef.current || socketRef.current.readyState !== WebSocket.OPEN) return;
+
+  socketRef.current.send(JSON.stringify({
+    content: input,
+    sender_id: currentUserId, // ← include sender so MessageBubble renders correctly
+  }));
   setInput('');
-  };  
+};
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
